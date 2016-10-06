@@ -1,0 +1,7 @@
+{
+	"KEY_1": "value1",
+	"KEY_2": "value2",
+
+	"KEY_3": "value3 should be in <strong>bold</strong>, that would be <b>better</b>",
+	"KEY_4": "value4"
+}

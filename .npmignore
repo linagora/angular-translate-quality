@@ -1,0 +1,9 @@
+node_modules/
+test/
+tmp/
+target/
+coverage/
+
+.*
+npm-debug.log
+Gruntfile.js

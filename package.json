@@ -1,0 +1,30 @@
+{
+  "name": "angular-translate-quality",
+  "version": "1.0.0",
+  "description": "A JS library to verify the coherence and the correctness of angular-translate elements.",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "gulp test"
+  },
+  "keywords": [
+    "angularjs",
+    "angular-translate",
+    "i18n",
+    "internationalization",
+    "linagora"
+  ],
+  "dependencies": {
+    "collections": "^5.0.4",
+    "glob": "^7.1.0"
+  },
+  "devDependencies": {
+    "chai": "2.3.0",
+    "gulp-gjslint": "0.1.5",
+    "gulp-istanbul": "^1.1.1",
+    "gulp-jshint": "2.0.1",
+    "gulp-mocha": "^3.0.1",
+    "mocha": "^3.1.0"
+  },
+  "author": "Vincent Zurczak",
+  "license": "MIT"
+}
