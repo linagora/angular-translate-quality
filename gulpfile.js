@@ -49,3 +49,16 @@ gulp.task('test', ['pre-test'], function(done) {
   .pipe(istanbul.writeReports())
   .pipe(istanbul.enforceThresholds({ thresholds: { global: 90 }}));
 });
+
+
+/*
+ * RELEASE "tasks".
+ *
+ * Note: we use the "gulp release approach":
+ *
+ * 1. Create a tag based on current version specified in package.json
+ * 2. Publish the project to NPM repository.
+ * 3. Bump the version of package.json, bower.json or/and manifest.json.
+ * 4. Commit and push to Github.
+ */
+require('gulp-release-it')(gulp);

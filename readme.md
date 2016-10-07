@@ -19,12 +19,17 @@ This library allows to check that...
 * ... all the HTML files reference a key that was declared in the JSon files.
 * ... no HTML file mixes the *translate* directive and the *translate* filter.
 
+This library does not support...
+
+* ... keys declared in Javascript code (only in JSon files).
+* ... namespaces in JSon files (at least, not for the moment).
+
 
 ## Options
 
 * **options.loc_i18n**: the location of the JSon files. Default is `./src/i18n/`.
 * **options.loc_html**: the location of the JSon files. Default is `./src/**/`.
-* **cb**: a callback function to handle an error message.
+* **cb**: a callback function to handle error messages. Default is `console.log`.
 
 
 ## Usage
@@ -37,7 +42,7 @@ npm install angular-translate-quality --save-dev
 
 ```js
 var qual = require('angular-translate-quality');
-qual.validate();
+var valid = qual.validate();
 ```
 
 ... or with other options...
@@ -49,9 +54,9 @@ function cb(msg) {
   console.log(msg);
 }
 
-qual.validate( {
-  loc_i18n: './i18n/',
-  loc_html: './html/',
+var valid = qual.validate({
+  loc_i18n: './i18n/**/',
+  loc_html: './html/**/',
   cb: cb
 });
 ```
@@ -61,7 +66,18 @@ qual.validate( {
 
 ```js
 var qual = require('angular-translate-quality');
-gulp.task('check_i18n', qual.validate);
+var gutil = require('gulp-util');
+
+gulp.task('check_i18n', function() {
+
+  var res = qual.validate();
+  if (! res) {
+    throw new gutil.PluginError({
+      plugin: 'check_i18n',
+      message: 'Errors were found about internationalization.'
+    });
+  }
+});
 ```
 
 To run checks then, just execute **gulp check_i18n**.
@@ -70,3 +86,12 @@ To run checks then, just execute **gulp check_i18n**.
 ## License
 
 This package is licensed under the terms of the MIT license.
+
+
+## Developers
+
+* Initialize: `npm install`
+* Test: `gulp test`
+* Lint check: `gulp lint`
+* [Release](https://www.npmjs.com/~linagora): `gulp complete-release`
+* [Local build](http://podefr.tumblr.com/post/30488475488/locally-test-your-npm-modules-without-publishing): `npm pack`

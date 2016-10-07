@@ -11,6 +11,8 @@
     "angular-translate",
     "i18n",
     "internationalization",
+    "translation",
+    "quality",
     "linagora"
   ],
   "dependencies": {
@@ -23,8 +25,16 @@
     "gulp-istanbul": "^1.1.1",
     "gulp-jshint": "2.0.1",
     "gulp-mocha": "^3.0.1",
+    "gulp-release-it": "^1.1.2",
     "mocha": "^3.1.0"
   },
   "author": "Vincent Zurczak",
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/linagora/angular-translate-quality.git"
+  },
+  "bugs": {
+    "url": "https://github.com/linagora/angular-translate-quality/issues"
+  }
 }
