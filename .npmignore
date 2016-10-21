@@ -1,0 +1,10 @@
+node_modules/
+test/
+tmp/
+target/
+coverage/
+
+.*
+*.*gz
+npm-debug.log
+gulpfile.js
