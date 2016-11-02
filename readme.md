@@ -96,3 +96,6 @@ This package is licensed under the terms of the MIT license.
 * Lint check: `gulp lint`
 * [Release](https://www.npmjs.com/~linagora): `gulp complete-release`
 * [Local build](http://podefr.tumblr.com/post/30488475488/locally-test-your-npm-modules-without-publishing): `npm pack`
+
+For Linagora folks, releases to [our NPM repository](https://www.npmjs.com/~linagora) are managed through our Jenkins server.  
+Please, log into it and run the **angular-translate-quality-release** job.
