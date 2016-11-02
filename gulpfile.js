@@ -52,6 +52,17 @@ gulp.task('test', ['pre-test'], function(done) {
 
 
 /*
+ *  Task to send the coverage report to Coveralls.
+ */
+gulp.task('coveralls', ['test'], function(done) {
+  var coveralls = require('gulp-coveralls');
+
+  gulp.src('coverage/lcov.info')
+    .pipe(coveralls());
+});
+
+
+/*
  * RELEASE "tasks".
  *
  * Note: we use the "gulp release approach":
