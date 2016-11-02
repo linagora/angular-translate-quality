@@ -54,10 +54,10 @@ gulp.task('test', ['pre-test'], function(done) {
 /*
  *  Task to send the coverage report to Coveralls.
  */
-gulp.task('coveralls', ['test'], function(done) {
+gulp.task('coveralls', function(done) {
   var coveralls = require('gulp-coveralls');
 
-  gulp.src('coverage/lcov.info')
+  gulp.src('./coverage/**/lcov.info')
     .pipe(coveralls());
 });
 
