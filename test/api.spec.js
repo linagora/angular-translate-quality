@@ -153,4 +153,21 @@ describe('Validation on real projects', function() {
     assert.equal(errors[2], '[ WARNING ] Non-translated text in view.html: TITLE="todo 2"');
     assert.equal(errors[3], '[ WARNING ] Non-translated text in view.html: title="{{ \'KEY_2\' | translate }} not totally translated"');
   });
+  
+  
+  it('should find non-translated text between mark-ups in HTML files', function() {
+
+    var options = {
+      loc_i18n: __dirname + '/resources/html_markups',
+      loc_html: __dirname + '/resources/html_markups',
+      cb: cb,
+      check_html: true
+    };
+
+    qual.validate(options);
+    assert.equal(errors.length, 3);
+    assert.equal(errors[0], '[ WARNING ] Non-translated text between mark-ups in view.html: "This is not translated. {{ \'KEY_1\' | translate }}"');
+    assert.equal(errors[1], '[ WARNING ] Non-translated text between mark-ups in view.html: "Not done yet"');
+    assert.equal(errors[2], '[ WARNING ] Non-translated text between mark-ups in view.html: "This either"');
+  });
 });
