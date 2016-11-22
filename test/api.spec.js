@@ -170,4 +170,20 @@ describe('Validation on real projects', function() {
     assert.equal(errors[1], '[ WARNING ] Non-translated text between mark-ups in view.html: "Not done yet"');
     assert.equal(errors[2], '[ WARNING ] Non-translated text between mark-ups in view.html: "This either"');
   });
+
+
+  it('should find keys that are not used in HTML files', function() {
+
+    var options = {
+      loc_i18n: __dirname + '/resources/keys_are_not_used',
+      loc_html: __dirname + '/resources/keys_are_not_used',
+      cb: cb,
+      check_html: true
+    };
+
+    qual.validate(options);
+    assert.equal(errors.length, 2);
+    assert.equal(errors[0], '[ WARNING ] Key KEY_2 is not used in any HTML file.');
+    assert.equal(errors[1], '[ WARNING ] Key KEY_4 is not used in any HTML file.');
+  });
 });
