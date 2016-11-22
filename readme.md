@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/linagora/angular-translate-quality.svg?branch=master)](https://travis-ci.org/linagora/angular-translate-quality)
 [![Coverage Status](https://coveralls.io/repos/github/linagora/angular-translate-quality/badge.svg?branch=master)](https://coveralls.io/github/linagora/angular-translate-quality?branch=master)
-[![npm](https://img.shields.io/badge/download.svg)](https://www.npmjs.com/package/angular-translate-quality)
+[![NPM](https://img.shields.io/badge/download-NPM-blue.svg)](https://www.npmjs.com/package/angular-translate-quality)
 
 This library allows to verify the correctness of angular-translate elements.  
 Angular-translate is an Angular library to manage internationalization through JSon
