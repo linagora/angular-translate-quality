@@ -153,8 +153,8 @@ describe('Validation on real projects', function() {
     assert.equal(errors[2], '[ WARNING ] Non-translated text in view.html: TITLE="todo 2"');
     assert.equal(errors[3], '[ WARNING ] Non-translated text in view.html: title="{{ \'KEY_2\' | translate }} not totally translated"');
   });
-  
-  
+
+
   it('should find non-translated text between mark-ups in HTML files', function() {
 
     var options = {
