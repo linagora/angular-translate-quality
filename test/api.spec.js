@@ -28,8 +28,8 @@ describe('Validation on real projects', function() {
 
     qual.validate(options);
     assert.equal(errors.length, 2);
-    assert.notEqual(errors[0].indexOf('Key present in en.json is missing in fr.json. Key: KEY_2'), -1);
-    assert.notEqual(errors[1].indexOf('Extra key present in fr.json. It was not found in en.json. Key: KEY_5'), -1);
+    assert.equal(errors[0], 'Key present in en.json is missing in fr.json. Key: KEY_2');
+    assert.equal(errors[1], 'Extra key present in fr.json. It was not found in en.json. Key: KEY_5');
   });
 
 
@@ -56,8 +56,8 @@ describe('Validation on real projects', function() {
 
     qual.validate(options);
     assert.equal(errors.length, 2);
-    assert.notEqual(errors[0].indexOf('A mark-up was expected for KEY_2 in fr.json. See en.json. Mark-up: strong'), -1);
-    assert.notEqual(errors[1].indexOf('A mark-up was found for KEY_3 in fr.json but it was not found in en.json. Mark-up: strong'), -1);
+    assert.equal(errors[0], 'A mark-up was expected for KEY_2 in fr.json. See en.json. Mark-up: strong');
+    assert.equal(errors[1], 'A mark-up was found for KEY_3 in fr.json but it was not found in en.json. Mark-up: strong');
   });
 
 
@@ -71,9 +71,9 @@ describe('Validation on real projects', function() {
 
     qual.validate(options);
     assert.equal(errors.length, 3);
-    assert.notEqual(errors[0].indexOf('Do NOT mix the translate directive and the translate filter. File in error: view_fail_1.html'), -1);
-    assert.notEqual(errors[1].indexOf('Do NOT mix the translate directive and the translate filter. File in error: view_fail_2.html'), -1);
-    assert.notEqual(errors[2].indexOf('Do NOT mix the translate directive and the translate filter. File in error: view_fail_3.html'), -1);
+    assert.equal(errors[0], 'Do NOT mix the translate directive and the translate filter. File in error: view_fail_1.html');
+    assert.equal(errors[1], 'Do NOT mix the translate directive and the translate filter. File in error: view_fail_2.html');
+    assert.equal(errors[2], 'Do NOT mix the translate directive and the translate filter. File in error: view_fail_3.html');
   });
 
 
@@ -87,9 +87,9 @@ describe('Validation on real projects', function() {
 
     qual.validate(options);
     assert.equal(errors.length, 3);
-    assert.notEqual(errors[0].indexOf('An unknown i18n key is referenced in view.html. Key name: KEY_54'), -1);
-    assert.notEqual(errors[1].indexOf('An unknown i18n key is referenced in view.html. Key name: MY_KEY'), -1);
-    assert.notEqual(errors[2].indexOf('An unknown i18n key is referenced in view.html. Key name: MY_OTHER_KEY'), -1);
+    assert.equal(errors[0], 'An unknown i18n key is referenced in view.html. Key name: KEY_54');
+    assert.equal(errors[1], 'An unknown i18n key is referenced in view.html. Key name: MY_KEY');
+    assert.equal(errors[2], 'An unknown i18n key is referenced in view.html. Key name: MY_OTHER_KEY');
   });
 
 
@@ -103,8 +103,8 @@ describe('Validation on real projects', function() {
 
     qual.validate(options);
     assert.equal(errors.length, 2);
-    assert.notEqual(errors[0].indexOf('i18n keys must all be in upper case (with only letters, numbers and underscores). Key: inv_key'), -1);
-    assert.notEqual(errors[1].indexOf('i18n keys must be sorted alphabetically. Key KEY_4 breaks this rule.'), -1);
+    assert.include(errors[0], 'i18n keys must all be in upper case (with only letters, numbers and underscores). Key: inv_key');
+    assert.include(errors[1], 'i18n keys must be sorted alphabetically. Key KEY_4 breaks this rule.');
   });
 
 
@@ -132,8 +132,25 @@ describe('Validation on real projects', function() {
 
     qual.validate(options);
     assert.equal(errors.length, 2);
-    console.log(errors)
-    assert.notEqual(errors[0].indexOf('[ WARNING ] Non-translated text in view.html: "this was not translated"'), -1);
-    assert.notEqual(errors[1].indexOf('[ WARNING ] Non-translated text in view.html: "this was not translated too"'), -1);
+    assert.equal(errors[0], '[ WARNING ] Non-translated text in view.html: alt="this was not translated"');
+    assert.equal(errors[1], '[ WARNING ] Non-translated text in view.html: aLT="this was not translated too"');
+  });
+
+
+  it('should find non-translated TITLE attributes in HTML files', function() {
+
+    var options = {
+      loc_i18n: __dirname + '/resources/html_title',
+      loc_html: __dirname + '/resources/html_title',
+      cb: cb,
+      check_html: true
+    };
+
+    qual.validate(options);
+    assert.equal(errors.length, 4);
+    assert.equal(errors[0], '[ WARNING ] Non-translated text in view.html: alt="this was not translated"');
+    assert.equal(errors[1], '[ WARNING ] Non-translated text in view.html: title="todo"');
+    assert.equal(errors[2], '[ WARNING ] Non-translated text in view.html: TITLE="todo 2"');
+    assert.equal(errors[3], '[ WARNING ] Non-translated text in view.html: title="{{ \'KEY_2\' | translate }} not totally translated"');
   });
 });
