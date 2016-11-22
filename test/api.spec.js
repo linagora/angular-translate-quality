@@ -119,4 +119,21 @@ describe('Validation on real projects', function() {
     qual.validate(options);
     assert.equal(errors.length, 0);
   });
+
+
+  it('should find non-translated ALT attributes in HTML files', function() {
+
+    var options = {
+      loc_i18n: __dirname + '/resources/html_alt',
+      loc_html: __dirname + '/resources/html_alt',
+      cb: cb,
+      check_html: true
+    };
+
+    qual.validate(options);
+    assert.equal(errors.length, 2);
+    console.log(errors)
+    assert.notEqual(errors[0].indexOf('[ WARNING ] Non-translated text in view.html: "this was not translated"'), -1);
+    assert.notEqual(errors[1].indexOf('[ WARNING ] Non-translated text in view.html: "this was not translated too"'), -1);
+  });
 });

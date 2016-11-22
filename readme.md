@@ -30,7 +30,9 @@ This library does not support...
 
 * **options.loc_i18n**: the location of the JSon files. Default is `./src/i18n/`.
 * **options.loc_html**: the location of the JSon files. Default is `./src/**/`.
-* **cb**: a callback function to handle error messages. Default is `console.log`.
+* **options.cb**: a callback function to handle error messages. Default is `console.log`.
+* **options.check_html**: `true` to search non-translated text in HTML mark-ups and attributes, `false otherwise`.  
+Default is `true`. All the mark-ups are verified. About attributes, only **alt** and *title** are verified.
 
 
 ## Usage
