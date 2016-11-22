@@ -24,7 +24,8 @@ gulp.task('lint', function() {
     .pipe(jshint())
     .pipe(jshint.reporter('default'))
     .pipe(gjslint(lintOptions))
-    .pipe(gjslint.reporter('console'));
+    .pipe(gjslint.reporter('console', {fail: true}))
+    .pipe(jshint.reporter('fail'));
 });
 
 
