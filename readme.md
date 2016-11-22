@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/linagora/angular-translate-quality.svg?branch=master)](https://travis-ci.org/linagora/angular-translate-quality)
 [![Coverage Status](https://coveralls.io/repos/github/linagora/angular-translate-quality/badge.svg?branch=master)](https://coveralls.io/github/linagora/angular-translate-quality?branch=master)
+[![npm](https://img.shields.io/badge/download.svg)](https://www.npmjs.com/package/angular-translate-quality)
 
 This library allows to verify the correctness of angular-translate elements.  
 Angular-translate is an Angular library to manage internationalization through JSon
@@ -86,6 +87,12 @@ To run checks then, just execute **gulp check_i18n**.
 ## License
 
 This package is licensed under the terms of the MIT license.
+
+
+## Changing the Version
+
+Simply update the version in the **package.json** file.  
+Then, commit and push your change to the Git repository, before running the release command.
 
 
 ## Developers
