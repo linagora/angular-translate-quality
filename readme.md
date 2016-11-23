@@ -99,13 +99,13 @@ options.forbidden_patterns.fr = [
 The structure of this option is the following.
 
 * Object keys: name of a JSon file, without the *.json* extension. `en.json` => `en`
-* Object values: array of objects, each object with the following properties.
+* Object values: array of objects.
 
-<!-- -->
+Each object with the following properties.
 
-  * **regex**: a regular expression that should output an error when found.
-  * **sensitive**: true if the pattern search should be case-sensitive (default: false, i.e. case insensitive).
-  * **msg**: the message to display when the regular expression was found in a value.
+* **regex**: a regular expression that should output an error when found.
+* **sensitive**: true if the pattern search should be case-sensitive (default: false, i.e. case insensitive).
+* **msg**: the message to display when the regular expression was found in a value.
 
 
 ## Example with Gulp
