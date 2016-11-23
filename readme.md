@@ -37,24 +37,27 @@ This library does not support...
 * **options.loc_html**: the location of the JSon files. Default is `./src/**/`.
 * **options.cb**: a callback function to handle error messages. Default is `console.log`.
 * **options.forbidden_patterns**: a set of forbidden patterns in values. Default is `{}`.
-* **options.check_html**: `true` to search non-translated text in HTML mark-ups and attributes, `false otherwise`.  
-Default is `true`. All the mark-ups are verified. About attributes, only **alt** and **title** are verified.
+* **options.check_html**: `true` to search non-translated text in HTML mark-ups and attributes, 
+as well as in Angular texts (`{{ 'some text' }}`). Default is `true`. All the mark-ups are verified.
+About attributes, only **alt** and **title** are verified.
 
 
 ## Usage
 
-Add the dependency in your file.
+Add the dependency in your file...
 
 ```
 npm install angular-translate-quality --save-dev
 ```
+
+... and use it...
 
 ```js
 var qual = require('angular-translate-quality');
 var valid = qual.validate();
 ```
 
-... or with other options...
+... or with your own custom options...
 
 ```js
 var qual = require('angular-translate-quality');
