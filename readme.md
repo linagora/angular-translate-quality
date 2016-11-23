@@ -22,6 +22,7 @@ This library allows to check that...
 * ... no HTML file mixes the *translate* directive and the *translate* filter.
 * ... all the **alt** and **title** attributes are translated in HTML files.
 * ... all the mark-ups texts are translated in HTML files.
+* ... all the Angular texts (`{{ 'some text' }}`) are translated in HTML files.
 * ... all the i18n keys are used somewhere in the HTML files.
 
 This library does not support...
@@ -85,7 +86,7 @@ var options = {
 
 options.forbidden_patterns.en = [
   {regex: '\\s+:', msg: 'Colons cannot be preceded by a white space character.'},
-  {regex: 'banned', sensitive: true, msg: '"Banned" is a forbidden key word.'}
+  {regex: 'banned', sensitive: true, msg: '"banned" is a forbidden key word.'}
 ];
 
 options.forbidden_patterns.fr = [
@@ -99,6 +100,7 @@ The structure of this option is the following.
 
 * Object keys: name of a JSon file, without the *.json* extension. `en.json` => `en`
 * Object values: array of objects, each object with the following properties.
+
   * **regex**: a regular expression that should output an error when found.
   * **sensitive**: true if the pattern search should be case-sensitive (default: false, i.e. case insensitive).
   * **msg**: the message to display when the regular expression was found in a value.

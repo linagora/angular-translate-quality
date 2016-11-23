@@ -188,6 +188,22 @@ describe('Validation on real projects', function() {
   });
 
 
+  it('should find non-translated Angular text in HTML files', function() {
+
+    var options = {
+      loc_i18n: __dirname + '/resources/html_angular_text',
+      loc_html: __dirname + '/resources/html_angular_text',
+      cb: cb,
+      check_html: true
+    };
+
+    qual.validate(options);
+    assert.equal(errors.length, 2);
+    assert.equal(errors[0], '[ WARNING ] Non-translated text might have been forgotten in view.html: "KEY_2"');
+    assert.equal(errors[1], '[ WARNING ] Non-translated text might have been forgotten in view.html: "This either"');
+  });
+
+
   it('should find forbidden patterns in values', function() {
 
     var options = {
@@ -201,7 +217,7 @@ describe('Validation on real projects', function() {
     // Nothing for the "it.json" file.
     options.forbidden_patterns.en = [
       {regex: '\\s+:', msg: 'Colons cannot be preceded by a white space character.'},
-      {regex: 'banned', sensitive: true, msg: '"Banned" is a forbidden key word.'}
+      {regex: 'banned', sensitive: true, msg: '"banned" is a forbidden key word.'}
     ];
 
     options.forbidden_patterns.fr = [
@@ -212,9 +228,9 @@ describe('Validation on real projects', function() {
 
     qual.validate(options);
     assert.equal(errors.length, 7);
-    assert.equal(errors[0], '3: Colons cannot be preceeded by a white space character.');
-    assert.equal(errors[1], '4: Colons cannot be preceeded by a white space character.');
-    assert.equal(errors[2], '5: "Banned" is a forbidden key word.');
+    assert.equal(errors[0], '3: Colons cannot be preceded by a white space character.');
+    assert.equal(errors[1], '4: Colons cannot be preceded by a white space character.');
+    assert.equal(errors[2], '5: "banned" is a forbidden key word.');
     assert.equal(errors[3], '3: Une virgule s\'écrit sans espace avant.');
     assert.equal(errors[4], '3: Une virgule s\'écrit avec un seul espace après.');
     assert.equal(errors[5], '4: Une phrase commence avec une majuscule.');
