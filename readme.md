@@ -15,10 +15,14 @@ This library allows to check that...
 * ... there is no trailing space in the JSon files (reduce the size).
 * ... keys are sorted alphabetically (ease the search for a specific key).
 * ... values that contain HTML mark-ups are closed correctly.
+* ... values do not contain forbidden patterns (to ban words, check typography, etc).
 * ... all the JSon files have the same keys (no missing key).
 * ... all the equivalent values (across all the JSon files) have the same number of HTML mark-ups.
 * ... all the HTML files reference a key that was declared in the JSon files.
 * ... no HTML file mixes the *translate* directive and the *translate* filter.
+* ... all the **alt** and **title** attributes are translated in HTML files.
+* ... all the mark-ups texts are translated in HTML files.
+* ... all the i18n keys are used somewhere in the HTML files.
 
 This library does not support...
 
@@ -31,8 +35,9 @@ This library does not support...
 * **options.loc_i18n**: the location of the JSon files. Default is `./src/i18n/`.
 * **options.loc_html**: the location of the JSon files. Default is `./src/**/`.
 * **options.cb**: a callback function to handle error messages. Default is `console.log`.
+* **options.forbidden_patterns**: a set of forbidden patterns in values. Default is `{}`.
 * **options.check_html**: `true` to search non-translated text in HTML mark-ups and attributes, `false otherwise`.  
-Default is `true`. All the mark-ups are verified. About attributes, only **alt** and *title** are verified.
+Default is `true`. All the mark-ups are verified. About attributes, only **alt** and **title** are verified.
 
 
 ## Usage
@@ -63,6 +68,40 @@ var valid = qual.validate({
   cb: cb
 });
 ```
+
+
+## Forbidden Patterns
+
+Forbidden patterns is an option to ban words or verify typography in translated text (values in JSon files).  
+Each JSon file can have its own patterns.
+
+In this example, we assume we have **en.json**, **fr.json** and **it.json** files.  
+We only define forbidden patterns in **en.json** and **fr.json**.
+
+```js
+var options = {
+      forbidden_patterns: {} 
+};
+
+options.forbidden_patterns.en = [
+  {regex: '\\s+:', msg: 'Colons cannot be preceded by a white space character.'},
+  {regex: 'banned', sensitive: true, msg: '"Banned" is a forbidden key word.'}
+];
+
+options.forbidden_patterns.fr = [
+  {regex: '\\s,', msg: 'Une virgule s\'écrit sans espace avant.'},
+  {regex: ',([^ ]| {2,})', msg: 'Une virgule s\'écrit avec un seul espace après.'},
+  {regex: '^[a-z]', sensitive: true, msg: 'Une phrase commence avec une majuscule.'}
+];
+```
+
+The structure of this option is the following.
+
+* Object keys: name of a JSon file, without the *.json* extension. `en.json` => `en`
+* Object values: array of objects, each object with the following properties.
+  * **regex**: a regular expression that should output an error when found.
+  * **sensitive**: true if the pattern search should be case-sensitive (default: false, i.e. case insensitive).
+  * **msg**: the message to display when the regular expression was found in a value.
 
 
 ## Example with Gulp
