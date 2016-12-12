@@ -24,6 +24,7 @@ This library allows to check that...
 * ... all the mark-ups texts are translated in HTML files.
 * ... all the Angular texts (`{{ 'some text' }}`) are translated in HTML files.
 * ... all the i18n keys are used somewhere in the HTML files.
+* ... all the translate filters are well-formed (e.g. no {{ KEY_WITHOUT_QUOTES | translate }}).
 
 This library does not support...
 
@@ -110,6 +111,26 @@ Each object has the following properties.
 * **regex**: a regular expression that should output an error when found.
 * **sensitive**: true if the pattern search should be case-sensitive (default: false, i.e. case insensitive).
 * **msg**: the message to display when the regular expression was found in a value.
+
+
+## Exclusions for Non-Translated Text
+
+When checking HTML files, mark-ups and some attributes (**alt**, **title**) are verified.  
+Angular-translate elements are removed from the text during the check. If the result is not empty
+(or only made up of white spaces), an error is returned. Notice that HTML entities (e.g. `&raquo;`) are
+also skipped from the check. It is possible to add exclusions too. Thus...
+
+```html
+<img src="" alt="..." />
+```
+
+... can be made valid by using the exclusions option.
+
+```js
+var options = {
+      exclusions: ['...'] 
+};
+```
 
 
 ## Example with Gulp
