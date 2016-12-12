@@ -4,14 +4,19 @@
 	<div>
 		{{ 'KEY_1' | translate }}
 	</div>
-	
+
 	<div class="whatever">
 		{{ 'KEY_2' | translate }}
 	</div>
-	
+
 	<p>
 		{{'KEY_2'}}
 	</p>
-	
+
 	<p>{{ 'This either' }}</p>
+
+	{{ job['this is a JS variable, not a i18n key']}}
+	{{ var + 'txt' }}
+	{{ function() | translate }}
+	{{ (var + 'txt')  | translate }}
 </div>

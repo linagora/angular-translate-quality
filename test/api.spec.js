@@ -212,7 +212,7 @@ describe('Validation on real projects', function() {
     var result = qual.validate(options);
     assert.equal(result, true);
     assert.equal(errors.length, 3);
-    assert.equal(errors[0], '[ WARNING ] Non-translated text between mark-ups in view.html: "This is not translated. {{ \'KEY_1\' | translate }}"');
+    assert.equal(errors[0], '[ WARNING ] Non-translated text between mark-ups in view.html: "This is not translated {{ \'KEY_1\' | translate }}."');
     assert.equal(errors[1], '[ WARNING ] Non-translated text between mark-ups in view.html: "Not done yet"');
     assert.equal(errors[2], '[ WARNING ] Non-translated text between mark-ups in view.html: "This either"');
   });
@@ -231,7 +231,7 @@ describe('Validation on real projects', function() {
     var result = qual.validate(options);
     assert.equal(result, true);
     assert.equal(errors.length, 1);
-    assert.equal(errors[0], '[ WARNING ] Non-translated text between mark-ups in view.html: "This is not translated. {{ \'KEY_1\' | translate }}"');
+    assert.equal(errors[0], '[ WARNING ] Non-translated text between mark-ups in view.html: "This is not translated {{ \'KEY_1\' | translate }}."');
   });
 
 
