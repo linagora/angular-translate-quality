@@ -137,6 +137,22 @@ describe('Validation on real projects', function() {
   });
 
 
+  it('should consider exclusions while searching non-translated ALT attributes in HTML files', function() {
+
+    var options = {
+      loc_i18n: __dirname + '/resources/html_alt',
+      loc_html: __dirname + '/resources/html_alt',
+      cb: cb,
+      check_html: true,
+      exclusions: ['this was not translated']
+    };
+
+    qual.validate(options);
+    assert.equal(errors.length, 1);
+    assert.equal(errors[0], '[ WARNING ] Non-translated text in view.html: aLT="this was not translated too"');
+  });
+
+
   it('should find non-translated TITLE attributes in HTML files', function() {
 
     var options = {
@@ -155,6 +171,24 @@ describe('Validation on real projects', function() {
   });
 
 
+  it('should consider exclusions while searching non-translated TITLE attributes in HTML files', function() {
+
+    var options = {
+      loc_i18n: __dirname + '/resources/html_title',
+      loc_html: __dirname + '/resources/html_title',
+      cb: cb,
+      check_html: true,
+      exclusions: ['todo 2']
+    };
+
+    qual.validate(options);
+    assert.equal(errors.length, 3);
+    assert.equal(errors[0], '[ WARNING ] Non-translated text in view.html: alt="this was not translated"');
+    assert.equal(errors[1], '[ WARNING ] Non-translated text in view.html: title="todo"');
+    assert.equal(errors[2], '[ WARNING ] Non-translated text in view.html: title="{{ \'KEY_2\' | translate }} not totally translated"');
+  });
+
+
   it('should find non-translated text between mark-ups in HTML files', function() {
 
     var options = {
@@ -169,6 +203,22 @@ describe('Validation on real projects', function() {
     assert.equal(errors[0], '[ WARNING ] Non-translated text between mark-ups in view.html: "This is not translated. {{ \'KEY_1\' | translate }}"');
     assert.equal(errors[1], '[ WARNING ] Non-translated text between mark-ups in view.html: "Not done yet"');
     assert.equal(errors[2], '[ WARNING ] Non-translated text between mark-ups in view.html: "This either"');
+  });
+
+
+  it('should consider exclusions while searching non-translated text between mark-ups in HTML files', function() {
+
+    var options = {
+      loc_i18n: __dirname + '/resources/html_markups',
+      loc_html: __dirname + '/resources/html_markups',
+      cb: cb,
+      check_html: true,
+      exclusions: ['This either', 'Not done yet']
+    };
+
+    qual.validate(options);
+    assert.equal(errors.length, 1);
+    assert.equal(errors[0], '[ WARNING ] Non-translated text between mark-ups in view.html: "This is not translated. {{ \'KEY_1\' | translate }}"');
   });
 
 

@@ -16,6 +16,7 @@ describe('Options', function() {
     assert.equal(options.loc_html, './src/**/');
     assert.equal(options.cb, console.log);
     assert.equal(options.check_html, true);
+    assert.deepEqual(options.exclusions, []);
   });
 
 
@@ -25,7 +26,8 @@ describe('Options', function() {
       loc_i18n: 'i18n/',
       loc_html: 'html/',
       cb: function() {},
-      check_html: false
+      check_html: false,
+      exclusions: ['test']
     });
 
     assert.isNotNull(options);
@@ -33,6 +35,7 @@ describe('Options', function() {
     assert.equal(options.loc_html, 'html/');
     assert.notEqual(options.cb, console.log);
     assert.equal(options.check_html, false);
+    assert.deepEqual(options.exclusions, ['test']);
   });
 
 
