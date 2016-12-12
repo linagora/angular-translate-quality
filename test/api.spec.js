@@ -302,4 +302,20 @@ describe('Validation on real projects', function() {
     assert.equal(errors[5], '4: Une phrase commence avec une majuscule.');
     assert.equal(errors[6], '5: Une virgule s\'écrit avec un seul espace après.');
   });
+
+
+  it('should detect malformed filters', function() {
+
+    var options = {
+      loc_i18n: __dirname + '/resources/malformed_filter',
+      loc_html: __dirname + '/resources/malformed_filter',
+      cb: cb
+    };
+
+    var result = qual.validate(options);
+    assert.equal(result, false);
+    assert.equal(errors.length, 2);
+    assert.equal(errors[0], 'Malformed declaration with the translate filter in view.html. The key must be surrounded with quotes. Key name: KEY_1');
+    assert.equal(errors[1], 'Malformed declaration with the translate filter in view.html. The key must be surrounded with quotes. Key name: KEY_2');
+  });
 });
