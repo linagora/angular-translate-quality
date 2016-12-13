@@ -37,6 +37,7 @@ This library does not support...
 * **options.loc_i18n**: the location of the JSon files. Default is `./src/i18n/`.
 * **options.loc_html**: the location of the JSon files. Default is `./src/**/`.
 * **options.cb**: a callback function to handle error messages. Default is `console.log`.
+* **options.fail_on_warning**: whether the result should be marked as invalid when warnings are found. Default is `false`.
 * **options.exclusions**: a list of (entire) strings that should be considered as not translatable.
 * **options.forbidden_patterns**: a set of forbidden patterns in values. Default is `{}`.
 * **options.check_html**: `true` to search non-translated text in HTML mark-ups and attributes, 

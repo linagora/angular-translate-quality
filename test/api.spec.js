@@ -269,6 +269,24 @@ describe('Validation on real projects', function() {
   });
 
 
+  it('should consider the result is invalid when fail_on_warning is true', function() {
+
+    var options = {
+      loc_i18n: __dirname + '/resources/html_angular_text',
+      loc_html: __dirname + '/resources/html_angular_text',
+      cb: cb,
+      check_html: true,
+      fail_on_warning: true
+    };
+
+    var result = qual.validate(options);
+    assert.equal(result, false);
+    assert.equal(errors.length, 2);
+    assert.equal(errors[0], '[ WARNING ] Non-translated text might have been forgotten in view.html: "KEY_2"');
+    assert.equal(errors[1], '[ WARNING ] Non-translated text might have been forgotten in view.html: "This either"');
+  });
+
+
   it('should find forbidden patterns in values', function() {
 
     var options = {
