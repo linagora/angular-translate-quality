@@ -40,6 +40,7 @@ This library does not support...
 * **options.fail_on_warning**: whether the result should be marked as invalid when warnings are found. Default is `false`.
 * **options.exclusions**: a list of (entire) strings that should be considered as not translatable.
 * **options.forbidden_patterns**: a set of forbidden patterns in values. Default is `{}`.
+* **options.external_keys_cb**: a callback function to handle errors related to external keys. No default value.
 * **options.check_html**: `true` to search non-translated text in HTML mark-ups and attributes, 
 as well as in Angular texts (`{{ 'some text' }}`). Default is `true`. All the mark-ups are verified.
 About attributes, only **alt** and **title** are verified.
@@ -132,6 +133,55 @@ var options = {
       exclusions: ['...'] 
 };
 ```
+
+
+## Handling Not Found Keys
+
+When **options.check_html** is true, this library searches for keys that re not used anywhere in HTML files.
+However, it is possible that keys are used in JS files instead of HTML ones. Let's consider the following example.
+
+HTML view:
+
+```html
+<p>{{ formatStatus( node ) | translate }}</p>
+```
+
+JS controller:
+
+```js
+$scope.formatStatus = formatStatus;
+
+function formatStatus( node ) {
+  // Find the right i18n key
+  return KEY;
+}
+```
+
+Basically, the translation key is dynamically deduced by a controller function.  
+So, the key(s) will not be found in HTML files but in the JS file. Therefore, we do not want any warning here.
+
+To deal with such situations, we can use the **options.external_keys_cb** option.  
+This option points to a callback function that takes the error callback (**options.cb**) and an array of the keys that
+were not found. This callback must return **false** to consider the messages as warnings, **true** to mark the validation as invalid.
+
+It is a way to filter warnings.
+
+```js
+$options.external_keys_cb = function( notFoundKeys ) {
+  notFoundKeys.forEach(function(errorCallback, key)) {
+    
+    // Manual check or read some file...
+    // If not found, add an error message.
+    errorCallback('Key ' + key + ' was not found anywhere.');
+  });
+
+  // Consider these errors as warnings => return false.
+  return false;
+}
+```
+
+The warnings returned by this callback function will replace those that would have been emitted by default for
+not found keys.
 
 
 ## Example with Gulp

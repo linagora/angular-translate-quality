@@ -252,6 +252,66 @@ describe('Validation on real projects', function() {
   });
 
 
+  it('should use the callback for keys that are not used in HTML files (no message and warnings)', function() {
+
+    var options = {
+      loc_i18n: __dirname + '/resources/keys_are_not_used',
+      loc_html: __dirname + '/resources/keys_are_not_used',
+      cb: cb,
+      check_html: true,
+      external_keys_cb: function(errorCallback, notFoundKeys) {
+        return false;
+      }
+    };
+
+    var result = qual.validate(options);
+    assert.equal(result, true);
+    assert.equal(errors.length, 0);
+  });
+
+
+  it('should use the callback for keys that are not used in HTML files (no message and errors)', function() {
+
+    var options = {
+      loc_i18n: __dirname + '/resources/keys_are_not_used',
+      loc_html: __dirname + '/resources/keys_are_not_used',
+      cb: cb,
+      check_html: true,
+      external_keys_cb: function(errorCallback, notFoundKeys) {
+        return true;
+      }
+    };
+
+    var result = qual.validate(options);
+    assert.equal(result, false);
+    assert.equal(errors.length, 0);
+  });
+
+
+  it('should use the callback for keys that are not used in HTML files (messages and errors)', function() {
+
+    var options = {
+      loc_i18n: __dirname + '/resources/keys_are_not_used',
+      loc_html: __dirname + '/resources/keys_are_not_used',
+      cb: cb,
+      check_html: true,
+      external_keys_cb: function(errorCallback, notFoundKeys) {
+        notFoundKeys.forEach(function(key) {
+          errorCallback('Key ' + key + ' was not found.');
+        });
+
+        return true;
+      }
+    };
+
+    var result = qual.validate(options);
+    assert.equal(result, false);
+    assert.equal(errors.length, 2);
+    assert.equal(errors[0], 'Key KEY_2 was not found.');
+    assert.equal(errors[1], 'Key KEY_4 was not found.');
+  });
+
+
   it('should find non-translated Angular text in HTML files', function() {
 
     var options = {
