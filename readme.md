@@ -16,6 +16,7 @@ This library allows to check that...
 * ... keys are sorted alphabetically (ease the search for a specific key).
 * ... values that contain HTML mark-ups are closed correctly.
 * ... values do not contain forbidden patterns (to ban words, check typography, etc).
+* ... values are trimmed (no white space character at the beginning or the end).
 * ... all the JSon files have the same keys (no missing key).
 * ... all the equivalent values (across all the JSon files) have the same number of HTML mark-ups.
 * ... all the HTML files reference a key that was declared in the JSon files.
@@ -41,7 +42,7 @@ This library does not support...
 * **options.exclusions**: a list of (entire) strings that should be considered as not translatable.
 * **options.forbidden_patterns**: a set of forbidden patterns in values. Default is `{}`.
 * **options.external_keys_cb**: a callback function to handle errors related to external keys. No default value.
-* **options.check_html**: `true` to search non-translated text in HTML mark-ups and attributes, 
+* **options.check_html**: `true` to search non-translated text in HTML mark-ups and attributes,
 as well as in Angular texts (`{{ 'some text' }}`). Default is `true`. All the mark-ups are verified.
 About attributes, only **alt** and **title** are verified.
 
@@ -92,14 +93,14 @@ var options = {
 };
 
 options.forbidden_patterns.en = [
-  {regex: '\\s+:', msg: 'Colons cannot be preceded by a white space character.'},
+  {regex: '\\s+[,.;:?!]', msg: '[EN] All the punctuation marks refuse any preceding white space character.'},
   {regex: 'banned', sensitive: true, msg: '"banned" is a forbidden key word.'}
 ];
 
 options.forbidden_patterns.fr = [
   {regex: '\\s,', msg: 'Une virgule s\'écrit sans espace avant.'},
   {regex: ',([^ ]| {2,})', msg: 'Une virgule s\'écrit avec un seul espace après.'},
-  {regex: '^[a-z]', sensitive: true, msg: 'Une phrase commence avec une majuscule.'}
+  {regex: '^[a-z]', sensitive: true, msg: 'A sentence starts with an upper-case letter.'}
 ];
 ```
 

@@ -439,4 +439,21 @@ describe('Validation on real projects', function() {
     assert.equal(errors[0], 'Malformed declaration with the translate filter in view.html. The key must be surrounded with quotes. Key name: KEY_1');
     assert.equal(errors[1], 'Malformed declaration with the translate filter in view.html. The key must be surrounded with quotes. Key name: KEY_2');
   });
+
+
+  it('should detect values that are not trimmed', function() {
+
+    var options = {
+      loc_i18n: __dirname + '/resources/values_not_trimmed',
+      loc_html: __dirname + '/resources/values_not_trimmed',
+      cb: cb
+    };
+
+    var result = qual.validate(options);
+    assert.equal(result, false);
+    assert.equal(errors.length, 3);
+    assert.equal(errors[0], '2: Values should be trimmed (no white space character at the beginning and the end). Key: KEY_1');
+    assert.equal(errors[1], '3: Values should be trimmed (no white space character at the beginning and the end). Key: KEY_2');
+    assert.equal(errors[2], '4: Values should be trimmed (no white space character at the beginning and the end). Key: KEY_3');
+  });
 });
