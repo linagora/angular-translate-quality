@@ -400,6 +400,31 @@ describe('Validation on real projects', function() {
   });
 
 
+  it('should result in an error when forbidden patterns keys do not refer to any file', function() {
+
+    var options = {
+      loc_i18n: __dirname + '/resources/forbidden_patterns',
+      loc_html: __dirname + '/resources/forbidden_patterns',
+      cb: cb,
+      forbidden_patterns: {}
+    };
+
+    options.forbidden_patterns.de = [
+      {regex: '\\s+:', msg: 'Colons cannot be preceded by a white space character.'}
+    ];
+
+    options.forbidden_patterns.fr = [
+      {regex: '\\s,', msg: 'Une virgule s\'écrit sans espace avant.'}
+    ];
+
+    var result = qual.validate(options);
+    assert.equal(result, false);
+    assert.equal(errors.length, 2);
+    assert.equal(errors[0], '3: Une virgule s\'écrit sans espace avant.');
+    assert.equal(errors[1], '"de.json" was not found. The forbidden patterns key "de" is invalid.');
+  });
+
+
   it('should detect malformed filters', function() {
 
     var options = {

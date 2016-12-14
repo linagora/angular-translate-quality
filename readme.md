@@ -88,7 +88,7 @@ We only define forbidden patterns in **en.json** and **fr.json**.
 
 ```js
 var options = {
-      forbidden_patterns: {} 
+      forbidden_patterns: {}
 };
 
 options.forbidden_patterns.en = [
@@ -167,8 +167,8 @@ were not found. This callback must return **false** to consider the messages as 
 It is a way to filter warnings.
 
 ```js
-$options.external_keys_cb = function( notFoundKeys ) {
-  notFoundKeys.forEach(function(errorCallback, key)) {
+$options.external_keys_cb = function(errorCallback, notFoundKeys) {
+  notFoundKeys.forEach(function(key) {
     
     // Manual check or read some file...
     // If not found, add an error message.
