@@ -329,7 +329,7 @@ describe('Validation on real projects', function() {
   });
 
 
-  it('should consider the result is invalid when fail_on_warning is true', function() {
+  it('should consider the result as invalid when fail_on_warning is true (non-translated text)', function() {
 
     var options = {
       loc_i18n: __dirname + '/resources/html_angular_text',
@@ -344,6 +344,24 @@ describe('Validation on real projects', function() {
     assert.equal(errors.length, 2);
     assert.equal(errors[0], '[ WARNING ] Non-translated text might have been forgotten in view.html: "KEY_2"');
     assert.equal(errors[1], '[ WARNING ] Non-translated text might have been forgotten in view.html: "This either"');
+  });
+
+
+  it('should consider the result as invalid when fail_on_warning is true (keys not used in HTML files)', function() {
+
+    var options = {
+      loc_i18n: __dirname + '/resources/keys_are_not_used',
+      loc_html: __dirname + '/resources/keys_are_not_used',
+      cb: cb,
+      check_html: true,
+      fail_on_warning: true
+    };
+
+    var result = qual.validate(options);
+    assert.equal(result, false);
+    assert.equal(errors.length, 2);
+    assert.equal(errors[0], '[ WARNING ] Key KEY_2 is not used in any HTML file.');
+    assert.equal(errors[1], '[ WARNING ] Key KEY_4 is not used in any HTML file.');
   });
 
 
