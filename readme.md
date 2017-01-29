@@ -5,7 +5,7 @@
 [![NPM](https://img.shields.io/badge/download-NPM-blue.svg)](https://www.npmjs.com/package/angular-translate-quality)
 
 This library allows to verify the correctness of angular-translate elements.  
-Angular-translate is an Angular library to manage internationalization through JSon
+[Angular-translate](https://github.com/angular-translate/angular-translate) is an Angular library to manage internationalization through JSon
 files and keys in HTML views. Each language is managed in its own JSon file.
 
 This library allows to check that...
