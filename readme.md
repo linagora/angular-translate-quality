@@ -260,6 +260,7 @@ Then, commit and push your change to the Git repository, before running the rele
 ## Developers
 
 * Fork TS Version was available following next tutorial: https://coderwall.com/p/q_gh-w/fork-and-patch-npm-moduels-hosted-on-github
+* Run: npm install angular-translate-quality --save-dev , in order to get the latest version.
 * Initialize: `npm install`
 * Test: `gulp test`
 * Send coverage report to Coveralls: `gulp coveralls` 
