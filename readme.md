@@ -208,40 +208,40 @@ To run checks then, just execute **gulp check_i18n**.
 ## Example with Grunt
 
 ```js
-    var quality = require('angular-translate-quality');
+var quality = require('angular-translate-quality');
 
-	grunt.registerTask('check_i18n', function() {
+grunt.registerTask('check_i18n', function() {
 
-        logfile(grunt, { filePath: 'i18n_errors.log', clearLogFile: true });
+    logfile(grunt, { filePath: 'i18n_errors.log', clearLogFile: true });
 
-        var options = {
-              forbidden_patterns: {}
-        };
+    var options = {
+        forbidden_patterns: {}
+    };
 
-        options.forbidden_patterns.en = [
-          {regex: '[()]+', msg: '[ WARNING ] "()" is a forbidden character.'},
-          {regex: '[:]+', msg: '[ WARNING ] ":" is a forbidden character.'}
-        ];
+    options.forbidden_patterns.en = [
+        {regex: '[()]+', msg: '[ WARNING ] "()" is a forbidden character.'},
+        {regex: '[:]+', msg: '[ WARNING ] ":" is a forbidden character.'}
+    ];
 
-        options.forbidden_patterns.es = [
-              {regex: '[()]+', msg: '[ WARNING ] "()" is a forbidden character.'},
-              {regex: '[:]+', msg: '[ WARNING ] ":" is a forbidden character.'}
-        ];
+    options.forbidden_patterns.es = [
+        {regex: '[()]+', msg: '[ WARNING ] "()" is a forbidden character.'},
+        {regex: '[:]+', msg: '[ WARNING ] ":" is a forbidden character.'}
+    ];
 
-        var valid = quality.validate({
-          loc_i18n: './i18n/translation/**/',
-          loc_i18n_ignored: './i18n/translation/tmp/',
-          loc_html: './views/**/',
-          fail_on_warning: false,
-          check_html: false,
-          forbidden_patterns: options.forbidden_patterns
-        });
+    var valid = quality.validate({
+        loc_i18n: './i18n/translation/**/',
+        loc_i18n_ignored: './i18n/translation/tmp/',
+        loc_html: './views/**/',
+        fail_on_warning: false,
+        check_html: false,
+        forbidden_patterns: options.forbidden_patterns
+    });
 
-          if (! valid) {
-              throw grunt.util.error('Errors were found about internationalization.');
-          }
+    if (! valid) {
+        throw grunt.util.error('Errors were found about internationalization.');
+    }
 
-	});
+});
 ```
 
 To run checks then, execute **grunt --base C:\Users\sdura\IdeaProjects\teamserver\src\main\angular --gruntfile C:\Users\sdura\IdeaProjects\teamserver\src\main\angular\GruntfileWindows.js check_i18n --force**.
