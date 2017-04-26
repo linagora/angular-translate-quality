@@ -234,7 +234,8 @@ grunt.registerTask('check_i18n', function() {
         loc_html: './views/**/',
         fail_on_warning: false,
         check_html: false,
-        forbidden_patterns: options.forbidden_patterns
+        forbidden_patterns: options.forbidden_patterns,
+        verify_i18n_in_ignored_code: true
     });
 
     if (! valid) {
