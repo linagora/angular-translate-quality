@@ -497,4 +497,31 @@ describe('Validation on real projects', function() {
     var result = qual.validate(options);
     assert.equal(result, true);
   });
+
+  it('should detect empty values', function() {
+
+    var options = {
+      loc_i18n: __dirname + '/resources/empty_values',
+      loc_html: __dirname + '/resources/empty_values',
+      cb: cb
+    };
+
+    var result = qual.validate(options);
+    assert.equal(result, false);
+    assert.equal(errors.length, 1);
+    assert.equal(errors[0], '2: Values should not be empty. Key: FOO');
+  });
+
+  it('should allow ignoring empty values', function() {
+
+    var options = {
+      loc_i18n: __dirname + '/resources/empty_values',
+      loc_html: __dirname + '/resources/empty_values',
+      ignore_empty_values: true,
+      cb: cb
+    };
+
+    var result = qual.validate(options);
+    assert.equal(result, true);
+  });
 });
