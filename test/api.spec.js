@@ -484,4 +484,17 @@ describe('Validation on real projects', function() {
     var result = qual.validate(options);
     assert.equal(result, true);
   });
+
+  it('should allow ignoring the order', function() {
+
+    var options = {
+      loc_i18n: __dirname + '/resources/invalid_order',
+      loc_html: __dirname + '/resources/invalid_order',
+      ignore_order: true,
+      cb: cb
+    };
+
+    var result = qual.validate(options);
+    assert.equal(result, true);
+  });
 });
