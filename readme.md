@@ -45,6 +45,7 @@ This library does not support...
 * **options.check_html**: `true` to search non-translated text in HTML mark-ups and attributes,
 as well as in Angular texts (`{{ 'some text' }}`). Default is `true`. All the mark-ups are verified.
 About attributes, only **alt** and **title** are verified.
+* **options.indent**: The indentation used in translation files. Default is `\t`.
 
 
 ## Usage

@@ -17,6 +17,7 @@ describe('Options', function() {
     assert.equal(options.cb, console.log);
     assert.equal(options.check_html, true);
     assert.equal(options.fail_on_warning, false);
+    assert.equal(options.indent, '\t');
     assert.deepEqual(options.exclusions, []);
   });
 
@@ -29,6 +30,7 @@ describe('Options', function() {
       cb: function() {},
       check_html: false,
       fail_on_warning: false,
+      indent: '  ',
       exclusions: ['test']
     });
 
@@ -38,6 +40,7 @@ describe('Options', function() {
     assert.notEqual(options.cb, console.log);
     assert.equal(options.check_html, false);
     assert.equal(options.fail_on_warning, false);
+    assert.equal(options.indent, '  ');
     assert.deepEqual(options.exclusions, ['test']);
   });
 

@@ -456,4 +456,17 @@ describe('Validation on real projects', function() {
     assert.equal(errors[1], '3: Values should be trimmed (no white space character at the beginning and the end). Key: KEY_2');
     assert.equal(errors[2], '4: Values should be trimmed (no white space character at the beginning and the end). Key: KEY_3');
   });
+
+  it('should allow setting the indent', function() {
+
+    var options = {
+      loc_i18n: __dirname + '/resources/space_indent',
+      loc_html: __dirname + '/resources/space_indent',
+      indent: '    ',
+      cb: cb
+    };
+
+    var result = qual.validate(options);
+    assert.equal(result, true);
+  });
 });
