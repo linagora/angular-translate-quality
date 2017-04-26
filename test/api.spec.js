@@ -110,7 +110,7 @@ describe('Validation on real projects', function() {
     assert.equal(result, false);
     assert.equal(errors.length, 2);
     assert.include(errors[0], 'i18n keys must all be in upper case (with only letters, numbers and underscores). Key: inv_key');
-    assert.include(errors[1], 'i18n keys must be sorted alphabetically. Key KEY_4 breaks this rule.');
+    assert.include(errors[1], 'i18n keys must be sorted alphabetically. Key inv_key breaks this rule.');
   });
 
 
