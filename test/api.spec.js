@@ -457,6 +457,21 @@ describe('Validation on real projects', function() {
     assert.equal(errors[2], '4: Values should be trimmed (no white space character at the beginning and the end). Key: KEY_3');
   });
 
+  it('should detect invalid tabs in keys or values', function() {
+
+    var options = {
+      loc_i18n: __dirname + '/resources/invalid_tabs',
+      loc_html: __dirname + '/resources/invalid_tabs',
+      cb: cb
+    };
+
+    var result = qual.validate(options);
+    assert.equal(result, false);
+    assert.equal(errors.length, 2);
+    assert.equal(errors[0], '2: Values must not contain tabs (this is invalid json, escape them using \t). Key: BAZ');
+    assert.equal(errors[1], '3: i18n keys must all be in upper case (with only letters, numbers and underscores). Key: FOO\tBAR');
+  });
+
   it('should allow setting the indent', function() {
 
     var options = {
