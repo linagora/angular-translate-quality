@@ -468,7 +468,7 @@ describe('Validation on real projects', function() {
     var result = qual.validate(options);
     assert.equal(result, false);
     assert.equal(errors.length, 2);
-    assert.equal(errors[0], '2: Values must not contain tabs (this is invalid json, escape them using \t). Key: BAZ');
+    assert.equal(errors[0], '2: Values cannot contain tabs (this is invalid json, escape them using \t). Key: BAZ');
     assert.equal(errors[1], '3: i18n keys must all be in upper case (with only letters, numbers and underscores). Key: FOO\tBAR');
   });
 

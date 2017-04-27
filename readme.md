@@ -48,8 +48,8 @@ as well as in Angular texts (`{{ 'some text' }}`). Default is `true`. All the ma
 About attributes, only **alt** and **title** are verified.
 * **options.indent**: The indentation used in translation files. Default is `\t`.
 * **ignore_order**: Normally keys should be arranged in alphabetical order to ease search for a specific key.
-Using this option this check can be deactivated. Default is `false`.
-* **ignore_empty_values**: Normally values should not be empty. Using this option this check can be deactivated.
+Using this option, this check can be deactivated. Default is `false`.
+* **ignore_empty_values**: Normally values should not be empty. Using this option, this check can be deactivated.
 Default is `false`.
 
 
