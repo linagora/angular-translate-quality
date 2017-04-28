@@ -41,15 +41,15 @@ This library does not support...
 * **options.cb**: a callback function to handle error messages. Default is `console.log`.
 * **options.fail_on_warning**: whether the result should be marked as invalid when warnings are found. Default is `false`.
 * **options.exclusions**: a list of (entire) strings that should be considered as not translatable.
-* **options.forbidden_patterns**: a set of forbidden patterns in values. Default is `{}`.
+* **options.forbidden_patterns**: a set of forbidden patterns in values. No default value.
 * **options.external_keys_cb**: a callback function to handle errors related to external keys. No default value.
 * **options.check_html**: `true` to search non-translated text in HTML mark-ups and attributes,
 as well as in Angular texts (`{{ 'some text' }}`). Default is `true`. All the mark-ups are verified.
 About attributes, only **alt** and **title** are verified.
 * **options.indent**: the indentation used in translation files. Default is `\t`.
-* **ignore_order**: normally keys should be arranged in alphabetical order to ease search for a specific key.
+* **options.ignore_order**: normally keys should be arranged in alphabetical order to ease search for a specific key.
 Using this option, this check can be deactivated. Default is `false`.
-* **ignore_empty_values**: normally values should not be empty. Using this option, this check can be deactivated.
+* **options.ignore_empty_values**: normally values should not be empty. Using this option, this check can be deactivated.
 Default is `false`.
 
 
