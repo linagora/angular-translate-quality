@@ -46,10 +46,10 @@ This library does not support...
 * **options.check_html**: `true` to search non-translated text in HTML mark-ups and attributes,
 as well as in Angular texts (`{{ 'some text' }}`). Default is `true`. All the mark-ups are verified.
 About attributes, only **alt** and **title** are verified.
-* **options.indent**: The indentation used in translation files. Default is `\t`.
-* **ignore_order**: Normally keys should be arranged in alphabetical order to ease search for a specific key.
+* **options.indent**: the indentation used in translation files. Default is `\t`.
+* **ignore_order**: normally keys should be arranged in alphabetical order to ease search for a specific key.
 Using this option, this check can be deactivated. Default is `false`.
-* **ignore_empty_values**: Normally values should not be empty. Using this option, this check can be deactivated.
+* **ignore_empty_values**: normally values should not be empty. Using this option, this check can be deactivated.
 Default is `false`.
 
 
