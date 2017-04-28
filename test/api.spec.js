@@ -110,7 +110,7 @@ describe('Validation on real projects', function() {
     assert.equal(result, false);
     assert.equal(errors.length, 2);
     assert.include(errors[0], 'i18n keys must all be in upper case (with only letters, numbers and underscores). Key: inv_key');
-    assert.include(errors[1], 'i18n keys must be sorted alphabetically. Key KEY_4 breaks this rule.');
+    assert.include(errors[1], 'i18n keys must be sorted alphabetically. Key inv_key breaks this rule.');
   });
 
 
@@ -455,5 +455,73 @@ describe('Validation on real projects', function() {
     assert.equal(errors[0], '2: Values should be trimmed (no white space character at the beginning and the end). Key: KEY_1');
     assert.equal(errors[1], '3: Values should be trimmed (no white space character at the beginning and the end). Key: KEY_2');
     assert.equal(errors[2], '4: Values should be trimmed (no white space character at the beginning and the end). Key: KEY_3');
+  });
+
+  it('should detect invalid tabs in keys or values', function() {
+
+    var options = {
+      loc_i18n: __dirname + '/resources/invalid_tabs',
+      loc_html: __dirname + '/resources/invalid_tabs',
+      cb: cb
+    };
+
+    var result = qual.validate(options);
+    assert.equal(result, false);
+    assert.equal(errors.length, 2);
+    assert.equal(errors[0], '2: Values cannot contain tabs (this is invalid json, escape them using \t). Key: BAZ');
+    assert.equal(errors[1], '3: i18n keys must all be in upper case (with only letters, numbers and underscores). Key: FOO\tBAR');
+  });
+
+  it('should allow setting the indent', function() {
+
+    var options = {
+      loc_i18n: __dirname + '/resources/space_indent',
+      loc_html: __dirname + '/resources/space_indent',
+      indent: '    ',
+      cb: cb
+    };
+
+    var result = qual.validate(options);
+    assert.equal(result, true);
+  });
+
+  it('should allow ignoring the order', function() {
+
+    var options = {
+      loc_i18n: __dirname + '/resources/invalid_order',
+      loc_html: __dirname + '/resources/invalid_order',
+      ignore_order: true,
+      cb: cb
+    };
+
+    var result = qual.validate(options);
+    assert.equal(result, true);
+  });
+
+  it('should detect empty values', function() {
+
+    var options = {
+      loc_i18n: __dirname + '/resources/empty_values',
+      loc_html: __dirname + '/resources/empty_values',
+      cb: cb
+    };
+
+    var result = qual.validate(options);
+    assert.equal(result, false);
+    assert.equal(errors.length, 1);
+    assert.equal(errors[0], '2: Values should not be empty. Key: FOO');
+  });
+
+  it('should allow ignoring empty values', function() {
+
+    var options = {
+      loc_i18n: __dirname + '/resources/empty_values',
+      loc_html: __dirname + '/resources/empty_values',
+      ignore_empty_values: true,
+      cb: cb
+    };
+
+    var result = qual.validate(options);
+    assert.equal(result, true);
   });
 });
