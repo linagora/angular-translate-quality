@@ -400,6 +400,75 @@ describe('Validation on real projects', function() {
   });
 
 
+  it('should find forbidden patterns but also consider the callback handler (1)', function() {
+
+    var options = {
+      loc_i18n: __dirname + '/resources/forbidden_patterns',
+      loc_html: __dirname + '/resources/forbidden_patterns',
+      cb: cb,
+      forbidden_patterns: {}
+    };
+
+    // Define a custom interceptor to manage forbidden keys errors.
+    options.forbidden_patterns_cb = function(errorCallback, key, value, errorMsg, lineNumber, filename) {
+
+      // Ignore the keys defined here, but only for English language
+      var keysToIgnoreForEnglish = ['KEY_2'];
+      var invalid = false;
+      if (filename !== 'en' || keysToIgnoreForEnglish.indexOf(key) === -1) {
+        errorCallback(lineNumber + ': ' + errorMsg);
+        invalid = true;
+      }
+
+      return invalid;
+    };
+
+    // Make options readable.
+    // Nothing for the "it.json" file.
+    options.forbidden_patterns.en = [
+      {regex: '\\s+:', msg: 'Colons cannot be preceded by a white space character.'},
+      {regex: 'banned', sensitive: true, msg: '"banned" is a forbidden key word.'}
+    ];
+
+    options.forbidden_patterns.fr = [
+      {regex: '\\s,', msg: 'Une virgule s\'écrit sans espace avant.'},
+      {regex: ',([^ ]| {2,})', msg: 'Une virgule s\'écrit avec un seul espace après.'},
+      {regex: '^[a-z]', sensitive: true, msg: 'Une phrase commence avec une majuscule.'}
+    ];
+
+    var result = qual.validate(options);
+    assert.equal(result, false);
+    assert.equal(errors.length, 6);
+    assert.equal(errors[0], '4: Colons cannot be preceded by a white space character.');
+    assert.equal(errors[1], '5: "banned" is a forbidden key word.');
+    assert.equal(errors[2], '3: Une virgule s\'écrit sans espace avant.');
+    assert.equal(errors[3], '3: Une virgule s\'écrit avec un seul espace après.');
+    assert.equal(errors[4], '4: Une phrase commence avec une majuscule.');
+    assert.equal(errors[5], '5: Une virgule s\'écrit avec un seul espace après.');
+  });
+
+
+  it('should find forbidden patterns but also consider the callback handler (2)', function() {
+
+    var options = {
+      loc_i18n: __dirname + '/resources/forbidden_patterns',
+      loc_html: __dirname + '/resources/forbidden_patterns',
+      cb: cb,
+      forbidden_patterns: {}
+    };
+
+    // Define a custom interceptor to manage forbidden keys errors.
+    options.forbidden_patterns_cb = function(errorCallback, key, value, errorMsg, lineNumber, filename) {
+      // Do nothing, ignore all these errors
+      return false;
+    };
+
+    var result = qual.validate(options);
+    assert.equal(result, true);
+    assert.equal(errors.length, 0);
+  });
+
+
   it('should result in an error when forbidden patterns keys do not refer to any file', function() {
 
     var options = {

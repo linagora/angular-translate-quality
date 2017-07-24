@@ -43,6 +43,7 @@ This library does not support...
 * **options.exclusions**: a list of (entire) strings that should be considered as not translatable.
 * **options.forbidden_patterns**: a set of forbidden patterns in values. No default value.
 * **options.external_keys_cb**: a callback function to handle errors related to external keys. No default value.
+* **options.forbidden_patterns_cb**: a callback function to handle errors related to forbidden patterns. No default value.
 * **options.check_html**: `true` to search non-translated text in HTML mark-ups and attributes,
 as well as in Angular texts (`{{ 'some text' }}`). Default is `true`. All the mark-ups are verified.
 About attributes, only **alt** and **title** are verified.
@@ -120,6 +121,33 @@ Each object has the following properties.
 * **regex**: a regular expression that should output an error when found.
 * **sensitive**: true if the pattern search should be case-sensitive (default: false, i.e. case insensitive).
 * **msg**: the message to display when the regular expression was found in a value.
+
+It is possible to intercept errors related to forbidden patterns.  
+As an example, considering the rules given above, a date pattern (e.g. `MMM d, y @ h:mm:ss a`) would be rejected.
+For such situations, it is possible to use a call back handler.
+
+```js
+var options = {
+  forbidden_patterns: {}
+};
+
+// ...
+
+options.forbidden_patterns_cb = function(errorCallback, key, value, errorMsg, lineNumber, filename) {
+
+  // Ignore the keys defined here, but only for English language
+  var keysToIgnoreForEnglish = ['KEY_2'];
+  var invalid = false;
+  if (filename !== 'en' || keysToIgnoreForEnglish.indexOf(key) === -1) {
+    // Display an error message
+    errorCallback(lineNumber + ': ' + errorMsg);
+    // Fail the validation
+    invalid = true;
+  }
+
+  return invalid;
+}
+```
 
 
 ## Exclusions for Non-Translated Text
