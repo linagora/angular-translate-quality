@@ -52,20 +52,20 @@ About attributes, only **alt** and **title** are verified.
 Add the dependency in your file...
 
 ```
-npm install angular-translate-quality --save-dev
+npm install serchduran-angular-translate-quality --save-dev
 ```
 
 ... and use it...
 
 ```js
-var qual = require('angular-translate-quality');
+var qual = require('serchduran-angular-translate-quality');
 var valid = qual.validate();
 ```
 
 ... or with your own custom options...
 
 ```js
-var qual = require('angular-translate-quality');
+var qual = require('serchduran-angular-translate-quality');
 
 function cb(msg) {
   console.log(msg);
@@ -188,7 +188,7 @@ not found keys.
 ## Example with Gulp
 
 ```js
-var qual = require('angular-translate-quality');
+var qual = require('serchduran-angular-translate-quality');
 var gutil = require('gulp-util');
 
 gulp.task('check_i18n', function() {
@@ -208,7 +208,7 @@ To run checks then, just execute **gulp check_i18n**.
 ## Example with Grunt
 
 ```js
-var quality = require('angular-translate-quality');
+var quality = require('serchduran-angular-translate-quality');
 
 grunt.registerTask('check_i18n', function() {
 
@@ -260,8 +260,7 @@ Then, commit and push your change to the Git repository, before running the rele
 
 ## Developers
 
-* Fork TS Version was available following next tutorial: https://coderwall.com/p/q_gh-w/fork-and-patch-npm-moduels-hosted-on-github
-* Run: npm install angular-translate-quality --save-dev , in order to get the latest version.
+* Run: npm install serchduran-angular-translate-quality --save-dev , in order to get the latest version.
 * Initialize: `npm install`
 * Test: `gulp test`
 * Send coverage report to Coveralls: `gulp coveralls` 

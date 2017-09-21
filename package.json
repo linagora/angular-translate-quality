@@ -1,6 +1,6 @@
 {
   "name": "serchduran-angular-translate-quality",
-  "version": "2.0.0",
+  "version": "2.0.2",
   "description": "A JS library to verify the coherence and the correctness of angular-translate elements.",
   "main": "lib/index.js",
   "scripts": {
@@ -29,7 +29,7 @@
     "gulp-release-it": "^1.1.2",
     "mocha": "^3.1.0"
   },
-  "author": "Sergio Durán",
+  "author": "Sergio Durán (fork from Vincent Zurczak)",
   "license": "MIT",
   "repository": {
     "type": "git",
